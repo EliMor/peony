@@ -8,6 +8,7 @@ build:
 .PHONY: up
 up:
 	docker-compose -f $(COMPOSE_FILE) up -d
+	@echo "Go to http://localhost:50000/"
 
 .PHONY: down
 down:
