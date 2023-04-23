@@ -7,7 +7,7 @@ build:
 
 .PHONY: up
 up:
-	docker-compose -f $(COMPOSE_FILE) up -d
+	docker-compose -f $(COMPOSE_FILE) up 
 	@echo "Go to http://localhost:50000/"
 
 .PHONY: down
@@ -21,3 +21,7 @@ logs:
 .PHONY: shell
 shell:
 	docker exec -it peony-box bash
+
+.PHONY: format
+format:
+	black app.py

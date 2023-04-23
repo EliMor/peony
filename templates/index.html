@@ -6,21 +6,35 @@
   </head>
   <body>
     <h1>Peony</h1>
-    {% if result %}
-      <p>{{ result }}</p>
-    {% endif %}
+
     <div class="container">
-    <form action="/" method="post" enctype="multipart/form-data">
-      <label class="form-button">
-        <span>Select file</span>
-        <input type="file" style="display: none">
-      </label>      
-      <br>
-      <label class="form-button">
-        <span>Upload</span>
-      <input type="submit" style="display: none">
-    </label>
-    </form>
+      <form action="/" method="post" enctype="multipart/form-data">
+        <label class="form-button">
+          <span>Select file</span>
+          <input type="file" name="file" id="file-input" style="display: none">
+        </label>      
+        <span id="filename" class="dark-text"></span>
+        <br>
+        <label class="form-button">
+          <span>Upload</span>
+          <input type="submit" style="display: none">
+        </label>
+      </form>
     </div>
+    {% if result %}
+    <div class="container">
+    <iframe src="{{ url_for('static', filename=result) }}" width="100%" height="600px"></iframe>
+    </div>
+    {% endif %}
+    
   </body>
 </html>
+
+<script>
+  const fileInput = document.getElementById('file-input');
+  const filenameSpan = document.getElementById('filename');
+  fileInput.addEventListener('change', (event) => {
+    const filename = event.target.files[0].name;
+    filenameSpan.textContent = `Selected file: ${filename}`;
+  });
+</script>
