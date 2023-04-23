@@ -4,4 +4,6 @@ services:
     container_name: peony-box
     build: .
     ports:
-      - "8080:5000"
+      - "5000:5000"
+    volumes:
+      - ./:/app
