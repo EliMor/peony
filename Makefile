@@ -1,18 +1,22 @@
-# Variables
-APP_NAME=myflaskapp
-DOCKER_BUILD_CMD=docker build -t $(APP_NAME) .
-DOCKER_RUN_CMD=docker run -d --name $(APP_NAME) -p 5000:5000 $(APP_NAME)
-DOCKER_STOP_CMD=docker stop $(APP_NAME)
-DOCKER_RM_CMD=docker rm $(APP_NAME)
+APP_NAME=peony
+COMPOSE_FILE=docker-compose.yml
 
-.PHONY: build up down
-
+.PHONY: build
 build:
-	$(DOCKER_BUILD_CMD)
+	docker-compose -f $(COMPOSE_FILE) build
 
+.PHONY: up
 up:
-	$(DOCKER_RUN_CMD)
+	docker-compose -f $(COMPOSE_FILE) up -d
 
+.PHONY: down
 down:
-	$(DOCKER_STOP_CMD)
-	$(DOCKER_RM_CMD)
+	docker-compose -f $(COMPOSE_FILE) down
+
+.PHONY: logs
+logs:
+	docker-compose -f $(COMPOSE_FILE) logs -f $(APP_NAME)
+
+.PHONY: shell
+shell:
+	docker exec -it peony-box bash

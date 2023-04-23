@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, request, render_template
 from werkzeug.utils import secure_filename
 from PIL import Image
