@@ -34,12 +34,17 @@ def upload_file():
             if file_type == "pdf":
                 # Do something with PDF file
                 result = "PDF file selected."
+                # OCR, extract topics
             elif file_type in ["jpg", "jpeg", "png"]:
-                # Resize and save image
+                # Handle case where no metadata
+
+                # extract camera data, date taken, any other data
+
                 data = gpsphoto.getGPSData(
                     os.path.join(app.config["UPLOAD_FOLDER"], filename)
                 )
                 logger.info(data)
+                # renders map
                 location = [data["Latitude"], data["Longitude"]]
                 map = folium.Map(location=location)
                 return_page = result = "dynamic.html"
